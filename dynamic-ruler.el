@@ -3,7 +3,7 @@
 ;; Copyright (C) 2015 Francesc Rocher
 
 ;; Author: Francesc Rocher <francesc.rocher@gmail.com>
-;; URL: http://github.com/rocher/dynamic-ruler
+;; URL: http://rocher.github.io/dynamic-ruler
 ;; Version: 0.1.0
 ;; Keywords: ruler tools convenience
 ;; Maintainer: Francesc Rocher <francesc.rocher@gmail.com>
