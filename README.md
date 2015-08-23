@@ -45,4 +45,11 @@ Copyright (C) 2015 Francesc Rocher francesc.rocher@gmail.com
 Licensed under the GNU GPL version 3 or later, see LICENSE for more
 information.
 
+### Note ###
+
+> This ruler is based on the `popup-ruler` by Rick Bielawski, which in
+> turn was *inspired by the one in fortran-mode but code-wise bears*
+> *no resemblance*.
+
+
 [![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](https://gratipay.com/rocher/)
