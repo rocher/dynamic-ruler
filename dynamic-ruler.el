@@ -338,6 +338,7 @@ in the buffer."
     key
     ))
 
+;;;###autoload
 (defmacro temporary-invisible-change (&rest forms)
   "Executes FORMS with a temporary buffer-undo-list, undoing on return.
 The changes you make within FORMS are undone before returning.
