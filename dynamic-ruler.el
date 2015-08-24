@@ -306,7 +306,8 @@ in the buffer."
         (loc (count-lines (window-start) (point)))
         overlay-list
         this-overlay
-        buffer-file-name)
+        buffer-file-name
+        key)
     (goto-char (window-start))
     ;; although we now use overlays, temporary-invisible-change is still
     ;; needed because move-to-column can insert spaces into the buffer.
