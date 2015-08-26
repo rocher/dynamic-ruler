@@ -13,7 +13,7 @@ moved around the buffer, for measuring and positioning text.
 ### Manual ###
 
 Download
-[dynamic-ruler.el](https://raw.gitusercontent.com/rocher/dynamic-ruler/master/dynamic-ruler.el)
+[dynamic-ruler.el](https://raw.githubusercontent.com/rocher/dynamic-ruler/master/dynamic-ruler.el)
 to your emacs library and add this line to your `.emacs` file:
 
 ```lisp
