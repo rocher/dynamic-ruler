@@ -327,6 +327,7 @@ in the buffer."
                                (setq overlay-list (cdr overlay-list))))))))
     key))
 
+;;;autoload
 (defmacro dynamic-ruler-temporary-invisible-change (&rest forms)
   "Execute FORMS with a temporary `buffer-undo-list', undoing on return.
 The changes you make within FORMS are undone before returning.
