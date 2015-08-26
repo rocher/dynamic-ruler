@@ -4,7 +4,7 @@
 
 ;; Author: Francesc Rocher <francesc.rocher@gmail.com>
 ;; URL: http://rocher.github.io/dynamic-ruler
-;; Version: 0.1.3
+;; Version: 0.1.4
 ;; Keywords: ruler tools convenience
 ;; Maintainer: Francesc Rocher <francesc.rocher@gmail.com>
 
