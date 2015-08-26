@@ -62,16 +62,14 @@
 (defgroup dynamic-ruler nil
   "Displays a dynamic ruler at point that can be freely moved
 around the buffer, for measuring and positioning text."
-  :group 'convenience
-)
+  :group 'convenience)
 
 (defface dynamic-ruler-positive-face
   '((t (:background "gold"
                     :foreground "gray16"
                     :slant normal
                     :weight normal
-                    :height 1.0)
-       ))
+                    :height 1.0)))
   "Default face to display positive numbers in dynamic rulers.")
 
 (defface dynamic-ruler-negative-face
@@ -79,26 +77,24 @@ around the buffer, for measuring and positioning text."
                     :foreground "gold"
                     :slant normal
                     :weight normal
-                    :height 1.0)
-       ))
+                    :height 1.0)))
   "Default face to display negative numbers in dynamic rulers.")
 
 (defcustom dynamic-ruler-vertical-interval 1
   "Puts numbers on a vertical ruler only at this interval.
 1 is the default which means every line.  5 would mean every N mod 5 line.
 Line number 1 is always marked explicitly regardless of this value."
-  :group 'dynamic-ruler
-)
+  :group 'dynamic-ruler)
 
 ;;;###autoload
 (defun dynamic-ruler ()
   "Temporarily display a horizontal ruler at `point'.
 Press up and down, or `n' and `p', keys to move it around the
-buffer. Left and right, or `f' and `b', will change the origin of
-the numbered scale. Keys `a', `e' and `c' will change also the
-origin of the numbered scale to the beginning, end and center,
-respectively. Numbers 0 to 9 will change the step interval. Press
-`q' to quit."
+buffer.  Left and right, or `f' and `b', will change the origin
+of the numbered scale.  Keys `a', `e' and `c' will change also
+the origin of the numbered scale to the beginning, end and
+center, respectively.  Numbers 0 to 9 will change the step
+interval.  Press `q' to quit."
   (interactive)
   (let ((key nil)
         (offset (current-column))
@@ -118,8 +114,7 @@ respectively. Numbers 0 to 9 will change the step interval. Press
              32
              (if x-initialized
                  "[cursor]: move; a,c,e: begin/center/end of line; 0-9: inc; q: quit"
-               "f,b,n,p: move; a,c,e: begin/center/end of line; 0-9: inc; q: quit")
-             ))
+               "f,b,n,p: move; a,c,e: begin/center/end of line; 0-9: inc; q: quit")))
       (if (eq (type-of key) 'vector)
           (let ((k (elt key 0)))
             (if (or (eq k ?f) (eq k 'right)) (setq offset (+ offset offset-inc)))
@@ -142,10 +137,7 @@ respectively. Numbers 0 to 9 will change the step interval. Press
                 (setq offset (/ (window-width) 2)))
             (if (eq k ?q)
                 (setq key t)
-              (setq key nil))
-            ))
-      ))
-  (discard-input)
+              (setq key nil))))))
   (sit-for 0)
   (message nil))
 
@@ -153,11 +145,11 @@ respectively. Numbers 0 to 9 will change the step interval. Press
 (defun dynamic-ruler-vertical ()
   "Temporarily display a vertical ruler in the `current-column'.
 Press left and right, or `f' and `b', keys to move it around the
-buffer. Up and down, or `n' and `p', will change the origin of
-the numbered scale. Keys `a', `e' and `c' will change also the
+buffer.  Up and down, or `n' and `p', will change the origin of
+the numbered scale.  Keys `a', `e' and `c' will change also the
 origin of the numbered scale to the beginning, end and center,
-respectively. Numbers 0 to 9 will change the numbered scale and
-the step interval. Press `q' to quit."
+respectively.  Numbers 0 to 9 will change the numbered scale and
+the step interval.  Press `q' to quit."
   (interactive)
   (let ((key nil)
         (column (current-column))
@@ -172,7 +164,7 @@ the step interval. Press `q' to quit."
         (let ((k (elt key 0)))
           (if (and (or (eq k ?f) (eq k 'right))
                    (< column (- (window-width) 8)))
-                   (setq column (1+ column)))
+              (setq column (1+ column)))
           (if (and (or (eq k ?b) (eq k 'left))
                    (>= column 1))
               (setq column (1- column)))
@@ -187,15 +179,13 @@ the step interval. Press `q' to quit."
                 (if (and (<= ?1 k) (<= k ?9))
                     (setq offset-inc (- k ?0)))
                 (setq dynamic-ruler-vertical-interval offset-inc)))
-          (if (eq k ?q) (setq key t) (setq key nil))
-          )
-        ))
+          (if (eq k ?q) (setq key t) (setq key nil)))))
     (discard-input)
     (sit-for 0)
     (message nil)))
 
 (defun dynamic-ruler-r-l (len)
-  "Returns right to left running ruler of length LEN.
+  "Return right to left running ruler of length LEN.
 Result is a list of 2 strings, markers and counters."
   (let* ((iterations (/ (1- (abs len)) 10))
          (short (- (* 10 (1+ iterations)) (abs len)))
@@ -213,7 +203,7 @@ Result is a list of 2 strings, markers and counters."
      (propertize (substring result2 short) 'face 'dynamic-ruler-negative-face))))
 
 (defun dynamic-ruler-l-r (len)
-  "Returns left to right running ruler of length LEN.
+  "Return left to right running ruler of length LEN.
 Result is a list of 2 strings; markers and counters."
   (let* ((iterations (/ (1- (abs len)) 10))
          (result1 "....|....|")
@@ -227,12 +217,10 @@ Result is a list of 2 strings; markers and counters."
       (setq result2 (concat result2 (substring (format inc2 i) -10))))
     (list
      (propertize (substring result1 0 len) 'face 'dynamic-ruler-positive-face)
-     (propertize (substring result2 0 len) 'face 'dynamic-ruler-positive-face)
-     )
-    ))
+     (propertize (substring result2 0 len) 'face 'dynamic-ruler-positive-face))))
 
 (defun dynamic-ruler-window-position (window-line)
-  "Returns the cons (screen-line . screen-column) of point."
+  "Return the cons (screen-line . screen-column) of point starting at WINDOW-LINE."
   (if (eq (current-buffer) (window-buffer))
       (if (or truncate-lines (/= 0 (window-hscroll)))
           ;; Lines never wrap when horizontal scrolling is in effect.
@@ -251,9 +239,9 @@ Result is a list of 2 strings; markers and counters."
             (cons (1- window-line) window-column))))))
 
 (defun dynamic-ruler-strings (window-line)
-  "Return a list of strings that form a vertical ruler.
-The ruler is intended to run from the top of the screen to the bottom so
-there are (window-height) strings."
+  "Return a list of strings that form a vertical ruler starting at WINDOW-LINE.
+The ruler is intended to run from the top of the screen to the
+bottom so there are (window-height) strings."
   (if (or truncate-lines (/= 0 (window-hscroll)))
       (let* ((position (dynamic-ruler-window-position window-line))
              (row (car position))
@@ -272,13 +260,14 @@ there are (window-height) strings."
            nil)
          (dynamic-ruler-make-strings
           1 end dynamic-ruler-vertical-interval width 'dynamic-ruler-positive-face)))
-    (error "dynamic-ruler-strings - unsupported window configuration")))
+    (error "Unsupported window configuration")))
 
 (defun dynamic-ruler-make-strings (start end interval width face)
   "Return a list of strings that form a vertical ruler.
 Numbering of the strings runs from START to END where strings not
-a multiple of INTERVAL do not contain numbers. The exception
-being that a string numbered 1 is always numbered."
+a multiple of INTERVAL do not contain numbers.  The exception
+being that a string numbered 1 is always numbered.  The strings
+have total length WIDTH and property FACE."
   (let* ((fmt (concat "─  %" (number-to-string width) "d  ─"))
          (spacer (concat "─  " (make-string width ? ) "  ─"))
          (increment (if (> start end) -1 1))
@@ -318,7 +307,7 @@ in the buffer."
              (move-to-column col t)
              (setq this-overlay (make-overlay (point) (point) nil t))
              (setq overlay-list (cons this-overlay overlay-list))
-                 (overlay-put this-overlay 'before-string (pop string-list))
+             (overlay-put this-overlay 'before-string (pop string-list))
              (forward-line)
              (if (< (point)(point-max))
                  (setq count (1- count))
@@ -333,16 +322,15 @@ in the buffer."
                           "[cursor]: move; a,c,e: begin/center/end of column; 0-9: inc; q: quit"
                         "f,b,n,p: move; a,c,e: begin/center/end of column; 0-9: inc; q: quit"
                         )))
-       (while overlay-list
-         (delete-overlay (prog1 (car overlay-list)
-                           (setq overlay-list (cdr overlay-list))))))))
-    key
-    ))
+           (while overlay-list
+             (delete-overlay (prog1 (car overlay-list)
+                               (setq overlay-list (cdr overlay-list))))))))
+    key))
 
 (defmacro dynamic-ruler-temporary-invisible-change (&rest forms)
-  "Executes FORMS with a temporary buffer-undo-list, undoing on return.
+  "Execute FORMS with a temporary `buffer-undo-list', undoing on return.
 The changes you make within FORMS are undone before returning.
-But more importantly, the buffer's buffer-undo-list is not affected.
+But more importantly, the buffer's `buffer-undo-list' is not affected.
 This macro allows you to temporarily modify read-only buffers too.
 Always return nil"
 `(let* ((buffer-undo-list)
@@ -356,4 +344,4 @@ Always return nil"
 
 (provide 'dynamic-ruler)
 
-;;; dynamic-ruler.el ends here.
+;;; dynamic-ruler.el ends here
