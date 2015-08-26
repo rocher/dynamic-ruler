@@ -112,7 +112,7 @@ interval.  Press `q' to quit."
                        (car left) (car right) "\n"))
              (line-beginning-position offset-line)
              32
-             (if x-initialized
+             (if (display-graphic-p)
                  "[cursor]: move; a,c,e: begin/center/end of line; 0-9: inc; q: quit"
                "f,b,n,p: move; a,c,e: begin/center/end of line; 0-9: inc; q: quit")))
       (if (eq (type-of key) 'vector)
@@ -318,7 +318,7 @@ in the buffer."
              (forward-line (1- loc))
              (move-to-column col))
            (setq key (read-key-sequence-vector
-                      (if x-initialized
+                      (if (display-graphic-p)
                           "[cursor]: move; a,c,e: begin/center/end of column; 0-9: inc; q: quit"
                         "f,b,n,p: move; a,c,e: begin/center/end of column; 0-9: inc; q: quit"
                         )))
