@@ -309,9 +309,9 @@ in the buffer."
         buffer-file-name
         key)
     (goto-char (window-start))
-    ;; although we now use overlays, temporary-invisible-change is still
+    ;; although we now use overlays, dynamic-ruler-temporary-invisible-change is still
     ;; needed because move-to-column can insert spaces into the buffer.
-    (temporary-invisible-change
+    (dynamic-ruler-temporary-invisible-change
      (unwind-protect
          (progn
            (while (and string-list (> count 0))
@@ -339,8 +339,7 @@ in the buffer."
     key
     ))
 
-;;;###autoload
-(defmacro temporary-invisible-change (&rest forms)
+(defmacro dynamic-ruler-temporary-invisible-change (&rest forms)
   "Executes FORMS with a temporary buffer-undo-list, undoing on return.
 The changes you make within FORMS are undone before returning.
 But more importantly, the buffer's buffer-undo-list is not affected.
