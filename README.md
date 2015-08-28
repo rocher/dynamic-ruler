@@ -1,4 +1,5 @@
 [![License GPL 3](http://img.shields.io/badge/license-GPL3-red.svg)](http://www.gnu.org/licenses/gpl-3.0.txt)
+[![MELPA](http://melpa.org/packages/dynamic-ruler-badge.svg)](http://melpa.org/#/dynamic-ruler)
 [![issues](http://img.shields.io/github/issues/rocher/dynamic-ruler.svg)](https://github.com/rocher/dynamic-ruler/issues)
 
 ## dynamic-ruler for Emacs ##
