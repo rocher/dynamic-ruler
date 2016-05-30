@@ -1,6 +1,6 @@
 ;;; dynamic-ruler.el --- Displays a dynamic ruler at point.
 
-;; Copyright (C) 2015 Francesc Rocher
+;; Copyright (C) 2015, 2016 Francesc Rocher
 
 ;; Author: Francesc Rocher <francesc.rocher@gmail.com>
 ;; URL: http://rocher.github.io/dynamic-ruler
@@ -97,6 +97,7 @@ center, respectively.  Numbers 0 to 9 will change the step
 interval.  Press `q' to quit."
   (interactive)
   (let ((key nil)
+        (key-type (if (>= emacs-major-version 25) 'cons 'vector))
         (offset (current-column))
         (offset-inc 1)
         (offset-line 1))
@@ -115,7 +116,7 @@ interval.  Press `q' to quit."
              (if (display-graphic-p)
                  "[cursor]: move; a,c,e: begin/center/end of line; 0-9: inc; q: quit"
                "f,b,n,p: move; a,c,e: begin/center/end of line; 0-9: inc; q: quit")))
-      (if (eq (type-of key) 'vector)
+      (if (eq (type-of key) key-type)
           (let ((k (elt key 0)))
             (if (or (eq k ?f) (eq k 'right)) (setq offset (+ offset offset-inc)))
             (if (or (eq k ?b) (eq k 'left)) (setq offset (- offset offset-inc)))
