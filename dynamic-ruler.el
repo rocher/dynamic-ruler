@@ -139,6 +139,7 @@ interval.  Press `q' to quit."
             (if (eq k ?q)
                 (setq key t)
               (setq key nil))))))
+  (discard-input)
   (sit-for 0)
   (message nil))
 
