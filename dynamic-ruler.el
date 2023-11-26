@@ -1,10 +1,10 @@
 ;;; dynamic-ruler.el --- Displays a dynamic ruler at point.
 
-;; Copyright (C) 2015, 2016 Francesc Rocher
+;; Copyright (C) 2015, 2016, 2023 Francesc Rocher
 
 ;; Author: Francesc Rocher <francesc.rocher@gmail.com>
 ;; URL: http://rocher.github.io/dynamic-ruler
-;; Version: 0.1.4
+;; Version: 0.1.7
 ;; Keywords: ruler tools convenience
 ;; Maintainer: Francesc Rocher <francesc.rocher@gmail.com>
 
@@ -52,6 +52,8 @@
 ;; vertical rulers.
 
 ;;; History:
+
+;; 2023-11-26 FRM Fixed loading error in Emacs-29
 
 ;; 2015-08-22 FRM Initial packaged release.
 
@@ -283,6 +285,22 @@ have total length WIDTH and property FACE."
       (setq start (+ increment start)))
     (reverse ruler-list)))
 
+;;;###autoload
+(defmacro dynamic-ruler-temporary-invisible-change (&rest forms)
+  "Execute FORMS with a temporary `buffer-undo-list', undoing on return.
+The changes you make within FORMS are undone before returning.
+But more importantly, the buffer's `buffer-undo-list' is not affected.
+This macro allows you to temporarily modify read-only buffers too.
+Always return nil"
+  `(let* ((buffer-undo-list)
+          (modified (buffer-modified-p))
+          (inhibit-read-only t))
+     (save-excursion
+       (unwind-protect
+           (progn ,@forms)
+         (primitive-undo (length buffer-undo-list) buffer-undo-list)
+         (set-buffer-modified-p modified))) ()))
+
 (defun dynamic-ruler-momentary-column (string-list col)
   "Momentarily display STRING-LIST in the current buffer at COL.
 
@@ -322,28 +340,12 @@ in the buffer."
            (setq key (read-key-sequence-vector
                       (if (display-graphic-p)
                           "[cursor]: move; a,c,e: begin/center/end of column; 0-9: inc; q: quit"
-                        "f,b,n,p: move; a,c,e: begin/center/end of column; 0-9: inc; q: quit"
-                        )))
+                        "f,b,n,p: move; a,c,e: begin/center/end of column; 0-9: inc; q: quit")))
+
            (while overlay-list
              (delete-overlay (prog1 (car overlay-list)
                                (setq overlay-list (cdr overlay-list))))))))
     key))
-
-;;;###autoload
-(defmacro dynamic-ruler-temporary-invisible-change (&rest forms)
-  "Execute FORMS with a temporary `buffer-undo-list', undoing on return.
-The changes you make within FORMS are undone before returning.
-But more importantly, the buffer's `buffer-undo-list' is not affected.
-This macro allows you to temporarily modify read-only buffers too.
-Always return nil"
-`(let* ((buffer-undo-list)
-          (modified (buffer-modified-p))
-          (inhibit-read-only t))
-     (save-excursion
-       (unwind-protect
-           (progn ,@forms)
-         (primitive-undo (length buffer-undo-list) buffer-undo-list)
-         (set-buffer-modified-p modified))) ()))
 
 (provide 'dynamic-ruler)
 
