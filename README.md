@@ -10,6 +10,7 @@ moved around the buffer, for measuring and positioning text.
 <p align="center">
     <img style="border:solid 1px #ccc" src="https://raw.githubusercontent.com/rocher/dynamic-ruler/master/dynamic-ruler.gif" />
 </p>
+
 ## Installation ##
 
 ### Manual ###
