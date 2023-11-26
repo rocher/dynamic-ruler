@@ -7,7 +7,7 @@
 This is an Emacs package to show a dynamic ruler that can be freely
 moved around the buffer, for measuring and positioning text.
 
-<p align="cernter">
+<p align="center">
     <img style="border:solid 1px #ccc" src="https://raw.githubusercontent.com/rocher/dynamic-ruler/master/dynamic-ruler.gif" />
 </p>
 ## Installation ##
@@ -38,7 +38,7 @@ you've added some improvements and you want them included upstream
 don't hesitate to send me a patch or even better - a GitHub pull
 request.
 
-<p align="cernter">
+<p align="center">
     <img style="border:solid 1px #ccc" src="https://raw.githubusercontent.com/rocher/dynamic-ruler/master/dynamic-ruler-vertical.gif" />
 </p>
 
